@@ -14,6 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.querySelector('#search-form');
   galleryEl = document.querySelector('.gallery');
 
+  if (!searchForm) {
+    console.error('Element with id "search-form" not found!');
+    return;
+  }
+
+  if (!galleryEl) {
+    console.error('Element with class "gallery" not found!');
+    return;
+  }
+
   searchForm.addEventListener('submit', onSearch);
 });
 
