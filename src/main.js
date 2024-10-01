@@ -8,16 +8,13 @@ import 'izitoast/dist/css/iziToast.min.css';
 let query = '';
 let page = 1;
 let galleryEl;
-let loadMoreBtn;
 let simpleLightbox;
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.querySelector('#search-form');
   galleryEl = document.querySelector('.gallery');
-  loadMoreBtn = document.querySelector('.load-more');
 
   searchForm.addEventListener('submit', onSearch);
-  loadMoreBtn.addEventListener('click', onLoadMore);
 });
 
 async function onSearch(event) {
@@ -34,12 +31,6 @@ async function onSearch(event) {
 
   clearGallery(galleryEl);
   page = 1;
-  loadMoreBtn.classList.add('hidden');
-  fetchAndRenderImages();
-}
-
-async function onLoadMore() {
-  page += 1;
   fetchAndRenderImages();
 }
 
@@ -61,10 +52,6 @@ async function fetchAndRenderImages() {
       simpleLightbox.refresh();
     } else {
       simpleLightbox = new SimpleLightbox('.gallery a');
-    }
-
-    if (data.hits.length > 0) {
-      loadMoreBtn.classList.remove('hidden');
     }
   } catch (error) {
     iziToast.error({
